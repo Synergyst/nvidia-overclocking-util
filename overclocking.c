@@ -210,54 +210,6 @@ int main(int argc, char** argv)
             }
         }
     }
-
-    /*if (argc > 2) {
-        int cur_gpu = atoi(argv[1]);
-        if (cur_gpu >= nGPU) {
-            printf("GPU%d not found!\nPlease specify a GPU within the range 0 to %d", cur_gpu, nGPU - 1);
-            return 0;
-        }
-
-        printf("Changing settings for GPU%d", cur_gpu);
-
-        if (argc > 2) {
-            int gpufreq_mhz = atoi(argv[2]);
-            int vramfreq_mhz;
-            if (-250 <= gpufreq_mhz && gpufreq_mhz <= 250) {
-                memset(&pstate_overclock, 0, sizeof(NV_GPU_PERF_PSTATES20_INFO_V1));
-                pstate_overclock.version = 0x11c94;
-                pstate_overclock.numPstates = 1;
-                pstate_overclock.numClocks = 1;
-                pstate_overclock.pstates[0].clocks[0].domainId = 0; // GPU core clock domain
-                pstate_overclock.pstates[0].clocks[0].freqDelta_kHz.value = gpufreq_mhz * 1000;
-                if (argc > 3) {
-                    vramfreq_mhz = atoi(argv[3]);
-                    if (-250 <= vramfreq_mhz && vramfreq_mhz <= 1250) {
-                        pstate_overclock.numClocks = 2;
-                        pstate_overclock.pstates[0].clocks[1].domainId = 4; // VRAM clock domain
-                        pstate_overclock.pstates[0].clocks[1].freqDelta_kHz.value = vramfreq_mhz * 1000 * get_memfreq_multiplier(memtype[cur_gpu]);
-                    } else {
-                        printf("\nVRAM frequency not in safe range (-250MHz to +250MHz).\n");
-                        printf("Continuing with GPU overclock...\n");
-                    }
-                }
-
-                if (NvSetPstates(hdlGPU[cur_gpu], &pstate_overclock)) {
-                    printf("\nGPU OC failed!\n");
-                    if (argc > 3)
-                        printf("VRAM OC failed!\n");
-                } else {
-                    printf("\nGPU OC OK: %d MHz\n", gpufreq_mhz);
-                    if (argc > 3 && -250 <= vramfreq_mhz && vramfreq_mhz <= 1250)
-                        printf("VRAM OC OK: %d MHz\n", vramfreq_mhz);
-                }
-            } else {
-                printf("\nGPU frequency not in safe range (-250MHz to +250MHz).\n");
-                return 1;
-            }
-        }
-    }*/
-
     NvUnload();
     return 0;
 }
